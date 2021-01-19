@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Qinmin Zheng / Research Associate Professor"
+title                    : "Research Associate Professor"
 title_separator          : "-"
 name                     : &name "Qinmin Zheng"
 description              : &description "personal description"
