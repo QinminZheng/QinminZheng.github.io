@@ -466,6 +466,7 @@ div.lang-en { display: block !important; }
 .postdoc-strip__copy small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
 .postdoc-strip__action { color: var(--link); font-size: 13px; white-space: nowrap; }
 .postdoc-strip:hover .postdoc-strip__action { text-decoration: underline; text-underline-offset: 3px; }
+.postdoc-strip + .postdoc-strip { border-top: 0; }
 
 .detail-page .topbar { padding-inline: max(28px, calc((100vw - 960px) / 2)); }
 .detail-page .document { display: flex; justify-content: center; margin-left: 0; padding: calc(var(--topbar-height) + 42px) 28px 64px; }
@@ -486,6 +487,7 @@ div.lang-en { display: block !important; }
 .simple-job-apply p { margin: 0 0 12px; }
 .simple-job-apply p:last-child { margin: 17px 0 0; }
 .apply-link { font-weight: 650; }
+.detail-note { color: var(--muted); font-size: 13px; line-height: 1.65; }
 .detail-footer { margin-top: 42px; }
 
 @media (max-width: 980px) {
