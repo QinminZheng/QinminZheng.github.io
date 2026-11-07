@@ -64,4 +64,23 @@
 
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
+
+  const pageViews = document.querySelector("[data-page-views]");
+  if (pageViews && location.hostname === "qinminzheng.github.io") {
+    const counterKey = "qinminzheng_github_io_homepage_5e9c2b7a";
+    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${counterKey}`, { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Page-view counter unavailable");
+        return response.json();
+      })
+      .then((data) => {
+        const value = Number(data.value);
+        if (!Number.isFinite(value)) throw new Error("Invalid page-view count");
+        pageViews.textContent = new Intl.NumberFormat("en-US").format(value);
+      })
+      .catch(() => {
+        pageViews.textContent = "—";
+        pageViews.parentElement.title = "Page-view count is temporarily unavailable";
+      });
+  }
 })();
