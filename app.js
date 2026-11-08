@@ -46,16 +46,27 @@
     if (event.key === "Escape") closeMenu();
   });
 
+  function setActiveSection(sectionId) {
+    let activeLink = null;
+    sectionLinks.forEach((link) => {
+      const active = link.getAttribute("href") === `#${sectionId}`;
+      link.classList.toggle("is-active", active);
+      if (active) activeLink = link;
+    });
+    if (activeLink) activeLink.scrollIntoView({ block: "nearest" });
+  }
+
   if ("IntersectionObserver" in window) {
+    const visibleSections = new Map();
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        sectionLinks.forEach((link) => {
-          link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleSections.set(entry.target, entry.intersectionRatio);
+          else visibleSections.delete(entry.target);
         });
+        const visible = [...visibleSections.entries()].sort((a, b) => b[1] - a[1])[0];
+        if (!visible) return;
+        setActiveSection(visible[0].id);
       },
       { rootMargin: "-18% 0px -68% 0px", threshold: [0, 0.15, 0.4] }
     );
